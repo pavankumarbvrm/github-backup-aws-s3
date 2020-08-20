@@ -31,10 +31,9 @@ module.exports = function(options) {
 
       if (options.mode === "organisation") {
         console.log("Running in Organisation mode")
-        github.repos.getForOrg(
-          { org: options.organisation, per_page: 100 },
-          handleReposResponse
-        )
+        await octokit.request('GET /orgs/$GITHUB_ORGANISATION/repos', {
+        org: 'org'
+      })
       } else {
         // Assume get all repos current user has access to
         console.log("Running in User mode")
